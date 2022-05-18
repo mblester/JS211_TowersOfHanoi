@@ -42,52 +42,58 @@ stacks[endStack].push(lastItem)
 
 // Before you move, should you check if the move it actually allowed? Should 3 be able to be stacked on 2
 const isLegal = (startStack, endStack) => {
-  // Your code here weight
-  if(typeof startStack !== 'string' || typeof endStack !== 'string'){
-    
-    return false; 
+  console.log(stacks[startStack].slice(-1), 'is less than ', stacks[endStack].slice(-1))
+  if(stacks[startStack].slice(-1)<stacks[endStack].slice(-1) || stacks[endStack].length === 0){
+    return true
+  } else {
+    return false
   }
+  // Your code here weight 
+  // if(typeof startStack !== 'string' || typeof endStack !== 'string'){
+    
+  //   return false; 
+  // }
 
   //create a for..in loop to iterate over the properties in stacks object
-  for(let key in stacks){
-    //if the current key you're iterating over does not have an array value then console log the following statement and return false
-    if(Array.isArray(stacks[key]) === false){
-     console.log('Invalid Data. Each key is supposed to be an array.'); 
-     return false; 
-    }
-  }
+  // for(let key in stacks){
+  //   //if the current key you're iterating over does not have an array value then console log the following statement and return false
+  //   if(Array.isArray(stacks[key]) === false){
+  //    console.log('Invalid Data. Each key is supposed to be an array.'); 
+  //    return false; 
+  //   }
+  // }
 
   // reassign startStack and endStack to the same values but lowercase and with no whitespace
-  startStack = startStack.toLowerCase().trim(); 
-  endStack = endStack.toLowerCase().trim(); 
+  // startStack = startStack.toLowerCase().trim(); 
+  // endStack = endStack.toLowerCase().trim(); 
 
   //if either the start or end stack input are strings 'a', 'b', and 'c', then log the following message and return false
-  if((startStack !== 'a' && startStack !== 'b' && startStack !== 'c') || (endStack !== 'a' && endStack !== 'b' && endStack !== 'c')){
+  // if((startStack !== 'a' && startStack !== 'b' && startStack !== 'c') || (endStack !== 'a' && endStack !== 'b' && endStack !== 'c')){
 
-    console.log('Must use the three stacks of Towers Of Hanoi which are A, B, and C.');
-    return false; 
-  }
+  //   console.log('Must use the three stacks of Towers Of Hanoi which are A, B, and C.');
+  //   return false; 
+  // }
 
   //reassign start and end stacks to be object[key]. This will give me direct access to the array values
-  startStack = stacks[startStack]; 
-  endStack = stacks[endStack]; 
+  // startStack = stacks[startStack]; 
+  // endStack = stacks[endStack]; 
 
   //startStack and endStack arrays at the last index will give access to whatever element is there and then store in these 2 variables 
-  let lastTokenOfStartStack = startStack[startStack.length -1]; 
-  let lastTokenOfEndStack = endStack[endStack.length -1];
+  // let lastTokenOfStartStack = startStack[startStack.length -1]; 
+  // let lastTokenOfEndStack = endStack[endStack.length -1];
 
 
   //If the endstack array is empty then automatically move piece and return true, otherwise if the last token removed from the start stack array is less than the last token in the end stack array then allow the move (return true), else return false and say illegal move. 
   
-  if(endStack.length === 0){ 
-    movePiece(lastTokenOfStartStack, startStack, endStack); 
-    return true; 
-  }else if(lastTokenOfStartStack < lastTokenOfEndStack){
-    movePiece(lastTokenOfStartStack, startStack, endStack); 
-    return true; 
-  }else{
-    return false; 
-  } 
+  // if(endStack.length === 0){ 
+  //   movePiece(startStack, endStack); 
+  //   return true; 
+  // }else if(lastTokenOfStartStack < lastTokenOfEndStack){
+  //   movePiece(startStack, endStack); 
+  //   return true; 
+  // }else{
+  //   return false; 
+  // } 
 
 }
 
@@ -107,8 +113,8 @@ const checkForWin = () => {
 
 // When is this function called? What should it do with its argument?
 const towersOfHanoi = (startStack, endStack) => {
-  movePiece(startStack, endStack);
   if(isLegal(startStack, endStack)){
+    movePiece(startStack, endStack);
     return true;
   }else{
     console.log('illegal move');
